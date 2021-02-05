@@ -5,7 +5,7 @@ export default function Header() {
   return (
     <React.Fragment>
       <Grid container justify="center">
-        <Grid item lg={6} md={6} sm={6} justify="center">
+        <Grid item lg={6} md={6} sm={6}>
           {/* Only used for title text */}
           <h1>Dashboard</h1>
         </Grid>
