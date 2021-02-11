@@ -1,5 +1,93 @@
 h1,
 h3,
 h5 {
-  margin: 5px 0;
+  margin: 2px 0;
+}
+
+h1 {
+  font-size: 6em;
+}
+
+h2 {
+  justify-self: flex-start;
+  margin: 20px 23px 0px 23px;
+}
+
+h3 {
+  font-size: 1.5em;
+}
+h5 {
+  font-size: 1.5em;
+  /* padding-top: 0.25em; */
+}
+
+p {
+  padding-top: 0.5em;
+}
+
+.weather-desc {
+  display: flex;
+}
+
+.w01d {
+  background-image: url(http://openweathermap.org/img/wn/01d@2x.png);
+  background-size: contain;
+  width: 2.5em;
+  height: 2.5em;
+}
+
+.w02d {
+  background-image: url(http://openweathermap.org/img/wn/02d@2x.png);
+  background-size: contain;
+  width: 2.5em;
+  height: 2.5em;
+}
+
+.w03d {
+  background-image: url(http://openweathermap.org/img/wn/03d@2x.png);
+  background-size: contain;
+  width: 2.5em;
+  height: 2.5em;
+}
+
+.w04d {
+  background-image: url(http://openweathermap.org/img/wn/04d@2x.png);
+  background-size: contain;
+  width: 2.5em;
+  height: 2.5em;
+}
+
+.w09d {
+  background-image: url(http://openweathermap.org/img/wn/09d@2x.png);
+  background-size: contain;
+  width: 2.5em;
+  height: 2.5em;
+}
+
+.w10d {
+  background-image: url(http://openweathermap.org/img/wn/10d@2x.png);
+  background-size: contain;
+  width: 2.5em;
+  height: 2.5em;
+}
+
+.w11d {
+  background-image: url(http://openweathermap.org/img/wn/11d@2x.png);
+  background-size: contain;
+  width: 2.5em;
+  height: 2.5em;
+}
+
+.w13d {
+  background-image: url(http://openweathermap.org/img/wn/13d@2x.png);
+  background-size: contain;
+  width: 2.5em;
+  height: 2.5em;
+}
+
+.w50d {
+  background-image: url(http://openweathermap.org/img/wn/50d@2x.png);
+  background-size: contain;
+  width: 2.5em;
+  height: 2.5em;
 }

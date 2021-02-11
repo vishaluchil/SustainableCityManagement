@@ -8,9 +8,9 @@ function App() {
   return (
     <div className="App">
       <Container maxWidth="lg">
-        {/* <Weather /> */}
-        <Header /> {/* App Header/Toolbar */}
-        <Widgets />
+        <Weather />
+        {/* <Header /> App Header/Toolbar
+        <Widgets /> */}
         {/* Will contain all the widgets for the dasboard (Weather, traffic ,etc) */}
       </Container>
     </div>
