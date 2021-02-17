@@ -10,13 +10,16 @@ export default function Weather() {
   const [icon, setIcon] = useState(null);
   const [feelsLike, setFeelsLike] = useState(null);
   const [main, setMain] = useState(null);
+  const [tempHoursX, setTempHoursX] = useState([]);
+  const [windHoursX, setWindHoursX] = useState([]);
+  const [humiHoursX, setHumiHoursX] = useState([]);
 
   useEffect(() => {
     fetch("https://citymanagement.herokuapp.com/weatherdata")
       .then((res) => res.json())
       .then((res) => {
         // setDetails(res.data);
-        console.log(res);
+        //console.log(res);
         setTemperature(res.main.temp);
         setIcon("w" + res.weather[0].icon);
         setFeelsLike(res.main.feels_like - 273);
@@ -24,27 +27,77 @@ export default function Weather() {
       });
   }, []);
 
-  //  details = JSON.parse(
-  //   '{"coord":{"lon":"-6.2672","lat":"53.344"},"weather":[{"id":"803","main":"Clouds","description":"broken clouds","icon":"04d"}],"base":"stations","main":{"temp":"275.42","feels_like":"266.46","temp_min":"274.82","temp_max":"275.93","pressure":"1009","humidity":"64"},"visibility":"10000","wind":{"speed":"9.26","deg":"80"},"clouds":{"all":"75"},"dt":"1612778129","sys":{"type":"1","id":"1565","country":"IE","sunrise":"1612771025","sunset":"1612804891"},"timezone":"0","id":"2964574","name":"Dublin","cod":"200"}'
-  // );
+  useEffect(() => {
+    async function fetchpreDataJSON() {
+      const response = await fetch(
+        "https://citymanagement.herokuapp.com/predictdata"
+      );
+      const preData = await response.json();
+      return preData;
+    }
 
-  const hours = [11, 12, 13, 14, 15];
-  //   for (let i = 11; i <= 16; i++) {
-  //     hours.push(i);
-  //   }
-  // console.log(new Date().getHours());
+    fetchpreDataJSON().then((preData) => {
+      for (let i = 0; i < 12; i++) {
+        setTempHoursX((tempHoursX) => [
+          ...tempHoursX,
+          preData.tempPrediction[i],
+        ]);
+        setHumiHoursX((humiHoursX) => [
+          ...humiHoursX,
+          preData.humidityPrediction[i],
+        ]);
+        setWindHoursX((windHoursX) => [
+          ...windHoursX,
+          preData.windPrediction[i] * 1.852,
+        ]);
+      }
+    });
+  }, []);
+
+  const hours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+  //console.log(new Date().getHours());
 
   const data = {
     labels: hours,
     datasets: [
       {
         label: "Hourly temperature prediction",
-        data: [2, 3, 5, 1.5, 4],
+        data: tempHoursX,
         backgroundColor: "#f44336bb",
         borderColor: "#3551b5bb",
         borderWidth: 5,
       },
+      {
+        label: "Hourly humidity prediction",
+        data: humiHoursX,
+        backgroundColor: "#f44336bb",
+        borderColor: "#3551b5bb",
+        borderWidth: 5,
+        hidden: true,
+      },
+      {
+        label: "Hourly wind speed prediction",
+        data: windHoursX,
+        backgroundColor: "#f44336bb",
+        borderColor: "#3551b5bb",
+        borderWidth: 5,
+        hidden: true,
+      },
     ],
+  };
+
+  const options = {
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            suggestedMin: 0,
+            suggestedMax: 12,
+          },
+        },
+      ],
+    },
+    maintainAspectRatio: false,
   };
 
   //   useEffect(() => {
@@ -125,7 +178,7 @@ export default function Weather() {
         <Grid item container xs={9} height={1}>
           <Grid item style={grid1} xs={12}>
             <Card style={card} raised>
-              <Line data={data} options={{ maintainAspectRatio: false }}></Line>
+              <Line data={data} options={options}></Line>
             </Card>
           </Grid>
           <Grid item style={grid2} xs={12}>
