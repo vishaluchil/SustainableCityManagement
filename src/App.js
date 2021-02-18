@@ -9,19 +9,13 @@ import Traffic from "./pages/Traffic/Traffic";
 function App() {
   return (
     <div className="App">
-<<<<<<< HEAD
       <Container maxWidth="lg">
-        {/* <Traffic /> */}
-        <Weather />
-=======
-      <Container maxWidth="lg"> 
-        {<Header /> }
-        {<Widgets /> }
+        {<Header />}
+        {<Widgets />}
         {/* Will contain all the widgets for the dasboard (Weather, traffic ,etc) <Weather /> */}
-        <Event/>
+        <Event />
         <Traffic />
         {/* <Weather /> */}
->>>>>>> cfd8ab39a781b79e83af23bdd1a6d8b98f098242
         {/* <Header /> App Header/Toolbar
         <Widgets /> */}
         {/* Will contain all the widgets for the dasboard (Weather, traffic ,etc) */}
