@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
-
 import "./Event.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
@@ -28,7 +27,7 @@ class ScheduleCalendar extends Component {
           defaultDate={new Date()}
           defaultView="month"
           events={this.state.events}
-          style={{ height: "100vh" }}
+          style={{ height: "80vh" }}
         />
       </div>
     );

@@ -20,14 +20,12 @@ export default function Event() {
 
   const cardLeft = {
     width: "100%",
-    height: "95%",
+    height: "90%",
     padding: "10px",
-    margin: "10px",
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-end",
     alignItems: "flex-start",
-    background: "linear-gradient(to top, #3551b5ee 0%, #f44336ee 100%)",
     color: "white",
   };
 
@@ -46,23 +44,24 @@ export default function Event() {
     flexDirection: "column",
   };
   return (
-    <Grid container style={style}>
+    <Grid container spacing={1} style={style}>
 
-      <Grid item container xs={3} height={1}>
-
-          <Card className={cardLeft} raised>
-            SANDOWLADLSANdsldnawl
+      <Grid item container xs={3}>
+        <Card style={cardLeft} raised>
+          SANDOWLADLSANdsldnawl
           </Card>
       </Grid>
 
       <Grid item container xs={9} height={1}>
+
         <Grid item style={grid2} xs={12}>
           <Card style={cardAccordion} raised>
-            <div class="rbc"><ScheduleCalendar/></div>
-          
+            <div class="rbc"><ScheduleCalendar /></div>
           </Card>
         </Grid>
+
       </Grid>
+
     </Grid>
 
   );
