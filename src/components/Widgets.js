@@ -2,6 +2,8 @@ import React from "react";
 import { Card, Grid } from "@material-ui/core";
 import WeatherWidget from "./WeatherWidget/WeatherWidget";
 import EventWidget from "./EventWidget/EventWidget";
+import AirQualityWidget from "./AirQualityWidget/AirQualityWidget";
+
 
 const Widget = () => {
   return (
@@ -24,7 +26,7 @@ export default function Widgets() {
       >
         <WeatherWidget />
         <EventWidget />
-        <Widget />
+        <AirQualityWidget />
         <Widget />
         <Widget />
         <Widget />
