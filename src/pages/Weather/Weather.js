@@ -70,16 +70,16 @@ export default function Weather() {
       {
         label: "Hourly humidity prediction",
         data: humiHoursX,
-        backgroundColor: "#f44336bb",
-        borderColor: "#3551b5bb",
+        backgroundColor: "#29b6f6bb",
+        borderColor: "#0288d1bb",
         borderWidth: 5,
         hidden: true,
       },
       {
         label: "Hourly wind speed prediction",
         data: windHoursX,
-        backgroundColor: "#f44336bb",
-        borderColor: "#3551b5bb",
+        backgroundColor: "#C0C0C0bb",
+        borderColor: "#808080bb",
         borderWidth: 5,
         hidden: true,
       },
@@ -91,8 +91,8 @@ export default function Weather() {
       yAxes: [
         {
           ticks: {
-            suggestedMin: 0,
-            suggestedMax: 12,
+            // suggestedMin: 0,
+            // suggestedMax: 100,
           },
         },
       ],

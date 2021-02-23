@@ -10,12 +10,12 @@ function App() {
   return (
     <div className="App">
       <Container maxWidth="lg">
-        {<Header />}
-        {<Widgets />}
+        {/* {<Header />}
+        {<Widgets />} */}
         {/* Will contain all the widgets for the dasboard (Weather, traffic ,etc) <Weather /> */}
-        <Event />
-        <Traffic />
-        {/* <Weather /> */}
+        {/* <Event /> */}
+        {/* <Traffic /> */}
+        <Weather />
         {/* <Header /> App Header/Toolbar
         <Widgets /> */}
         {/* Will contain all the widgets for the dasboard (Weather, traffic ,etc) */}

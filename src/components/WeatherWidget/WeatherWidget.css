@@ -13,20 +13,21 @@
   position: absolute;
   font-family: "Lato", sans-serif;
   font-weight: 300;
-  font-size: 3em;
+  font-size: 4em;
   color: #b8b8b8;
   left: 30px;
   /* opacity: 0; */
   transition: translatex(150px);
   animation: title-appear 500ms ease-out 500ms forwards;
+  margin-top: 24px;
 }
 .weather-card p {
   position: absolute;
   font-family: "Lato", sans-serif;
   font-weight: 300;
-  font-size: 2em;
+  font-size: 3em;
   color: #d2d2d2;
-  bottom: 45px;
+  bottom: 0px;
   left: 30px;
   animation: title-appear 500ms ease-out 500ms forwards;
 }
