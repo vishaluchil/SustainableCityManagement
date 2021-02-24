@@ -5,6 +5,7 @@ import "./../../assets/ui-library/index.css";
 import "../../maps.css";
 import StarsRoundedIcon from "@material-ui/icons/StarsRounded";
 import Button from "@material-ui/core/Button";
+import BikesCarousel from "./BikesCarousel";
 
 export default function Traffic() {
   useEffect(() => {
@@ -89,6 +90,13 @@ export default function Traffic() {
     color: "white",
   };
 
+  const buttonStyle = {
+    flex: "1 0 40%",
+    margin: 10,
+    height: 50,
+    fontSize: "1.1rem",
+  };
+
   return (
     <>
       <Grid container style={style}>
@@ -101,7 +109,9 @@ export default function Traffic() {
             </Card>
           </Grid>
           <Grid item style={gridLeftBottom} xs={12}>
-            <Card style={cardLeft} raised></Card>
+            <Card style={cardLeft} raised>
+              <BikesCarousel />
+            </Card>
           </Grid>
         </Grid>
         <Grid item container xs={4} height={1}>
@@ -137,72 +147,42 @@ export default function Traffic() {
                   }}
                 >
                   <Button
-                    style={{
-                      flex: "1 0 40%",
-                      margin: 10,
-                      height: 50,
-                      fontSize: "1.1rem",
-                    }}
+                    style={buttonStyle}
                     variant="contained"
                     color="primary"
                   >
                     Route One
                   </Button>
                   <Button
-                    style={{
-                      flex: "1 0 40%",
-                      margin: 10,
-                      height: 50,
-                      fontSize: "1.1rem",
-                    }}
+                    style={buttonStyle}
                     variant="contained"
                     color="primary"
                   >
                     Route One
                   </Button>
                   <Button
-                    style={{
-                      flex: "1 0 40%",
-                      margin: 10,
-                      height: 50,
-                      fontSize: "1.1rem",
-                    }}
+                    style={buttonStyle}
                     variant="contained"
                     color="primary"
                   >
                     Route One
                   </Button>
                   <Button
-                    style={{
-                      flex: "1 0 40%",
-                      margin: 10,
-                      height: 50,
-                      fontSize: "1.1rem",
-                    }}
+                    style={buttonStyle}
                     variant="contained"
                     color="primary"
                   >
                     Route One
                   </Button>
                   <Button
-                    style={{
-                      flex: "1 0 40%",
-                      margin: 10,
-                      height: 50,
-                      fontSize: "1.1rem",
-                    }}
+                    style={buttonStyle}
                     variant="contained"
                     color="primary"
                   >
                     Route One
                   </Button>
                   <Button
-                    style={{
-                      flex: "1 0 40%",
-                      margin: 10,
-                      height: 50,
-                      fontSize: "1.1rem",
-                    }}
+                    style={buttonStyle}
                     variant="contained"
                     color="primary"
                   >
