@@ -46,7 +46,7 @@ export default function Traffic() {
   };
 
   const gridRight = {
-    height: "95%",
+    height: "98.7%",
   };
 
   const gridLeftTop = {
@@ -56,7 +56,7 @@ export default function Traffic() {
 
   const gridLeftBottom = {
     width: "100%",
-    height: "20%",
+    height: "27%",
   };
 
   const cardLeft = {
