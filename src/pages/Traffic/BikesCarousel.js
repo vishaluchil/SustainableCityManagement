@@ -29,12 +29,11 @@ export default function BikesCarousel() {
           : null
       );
       console.log(bikesFiltered);
-      if (bikesFiltered) {
-        setBikesData([...bikesFiltered]);
-        console.log(bikesFiltered);
-      } else if (bikesFiltered == null || bikesFiltered == []) {
-        setBikesData([...bikesOriginal]);
-        console.log(bikesFiltered);
+      console.log(bikesOriginal);
+      if (bikesFiltered.length < 1) {
+        setBikesData(() => [...bikesOriginal]);
+      } else {
+        setBikesData(() => [...bikesFiltered]);
       }
     }
     setInput(e.target.value);
