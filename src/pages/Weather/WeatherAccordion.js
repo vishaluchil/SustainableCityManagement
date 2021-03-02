@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Accordion,
   AccordionDetails,
@@ -29,13 +29,53 @@ const useStyles = makeStyles((theme) => ({
 export default function WeatherAccordion() {
   const classes = useStyles();
 
+  const [windWeeklyX, setWindWeeklyX] = useState([]);
+  const [humiWeeklyX, setHumiWeeklyX] = useState([]);
+  const [rainWeeklyX, setRainWeeklyX] = useState([]);
+  const [tempWeeklyX, setTempWeeklyX] = useState([]);
+  const [cloudStr, setCloudStr] = useState([]);
+  const [icon, setIcon] = useState([]);
   const days = [1, 2, 3, 4, 5];
+
   const options = {
     weekday: "long",
     // year: "numeric",
     month: "long",
     day: "numeric",
   };
+
+  useEffect(() => {
+    async function fetchpreDataJSON() {
+      const response = await fetch(
+        "https://citymanagement.herokuapp.com/weeklydata"
+      );
+      const preData = await response.json();
+      return preData;
+    }
+
+    fetchpreDataJSON().then((preData) => {
+      setCloudStr(preData.cloudString);
+      setIcon(preData.icon);
+      for (let i = 0; i < 7; i++) {
+        setTempWeeklyX((tempWeeklyX) => [
+          ...tempWeeklyX,
+          preData.tempWeekly[i],
+        ]);
+        setRainWeeklyX((rainWeeklyX) => [
+          ...rainWeeklyX,
+          preData.rainWeekly[i],
+        ]);
+        setHumiWeeklyX((humiWeeklyX) => [
+          ...humiWeeklyX,
+          preData.humidityWeekly[i],
+        ]);
+        setWindWeeklyX((windWeeklyX) => [
+          ...windWeeklyX,
+          preData.windWeekly[i],
+        ]); //uncomment
+      }
+    });
+  }, []);
 
   const fiveDays = days.map((i) => {
     const day = new Date(Date.now() + i * 24 * 60 * 60 * 1000);
@@ -64,14 +104,27 @@ export default function WeatherAccordion() {
             >
               <Typography className={classes.heading}>{date}</Typography>
               <Typography className={classes.secondaryHeading}>
-                2°C Cloudy
+                {tempWeeklyX[index]}°C {cloudStr[index]}
               </Typography>
-              <div className="w02d"></div>
+              <div className={icon[index]}></div>
             </AccordionSummary>
-            <AccordionDetails>
-              <Typography>
-                Nulla facilisi. Phasellus sollicitudin nulla et quam mattis
-                feugiat. Aliquam eget maximus est, id dignissim quam.
+            <AccordionDetails
+              style={{
+                display: "flex",
+                justifyContent: "space-around",
+                alignItems: "center",
+                paddingTop: 0,
+                paddingBottom: 8,
+              }}
+            >
+              <Typography style={{ paddingTop: 0 }}>
+                Precipitation Chance: {rainWeeklyX[index]}%
+              </Typography>
+              <Typography style={{ paddingTop: 0 }}>
+                Humidity: {humiWeeklyX[index]}%
+              </Typography>
+              <Typography style={{ paddingTop: 0 }}>
+                Wind Speed: {windWeeklyX[index]} Km/H
               </Typography>
             </AccordionDetails>
           </Accordion>

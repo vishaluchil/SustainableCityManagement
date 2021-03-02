@@ -14,9 +14,13 @@
     "chart.js": "^2.9.4",
     "fontsource-roboto": "^4.0.0",
     "react": "^17.0.1",
+    "react-big-calendar": "^0.32.0",
     "react-chartjs-2": "^2.11.1",
     "react-dom": "^17.0.1",
-    "react-scripts": "^4.0.2",
+    "react-elastic-carousel": "^0.11.1",
+    "react-material-ui-carousel": "^2.1.2",
+    "react-scripts": "4.0.2",
+    "styled-components": "^5.2.1",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
@@ -42,5 +46,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.5",
+    "@testing-library/user-event": "^12.8.0"
   }
 }

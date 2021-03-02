@@ -5,6 +5,16 @@ import "./WeatherWidget.css";
 export default function WeatherWidget() {
   const [temperature, setTemperature] = useState(null);
 
+  useEffect(() => {
+    fetch("https://citymanagement.herokuapp.com/weatherdata")
+      .then((res) => res.json())
+      .then((res) => {
+        // setDetails(res.data);
+        //console.log(res);
+        setTemperature(Math.round(res.main.temp) - 273);
+      });
+  }, []);
+
   // useEffect(() => {
   //   fetch(
   //     "https://cors-anywhere.herokuapp.com/api.openweathermap.org/data/2.5/weather?q=Dublin,IE&appid=ef272ce5c18fd04114b31684fe8f50e1",

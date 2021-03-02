@@ -1,0 +1,26 @@
+.searchBox {
+  text-align: center;
+  width: 100%;
+  border-radius: 10%;
+}
+
+.bikeAddress {
+  text-align: center;
+  margin: 0.5em;
+  font-size: 1.5em;
+}
+
+.bikeContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 0.5em 0em;
+  font-size: 1.5em;
+}
+
+.line {
+  height: 75px;
+  width: 0;
+  border-left: 2px solid black;
+}

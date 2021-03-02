@@ -1,33 +1,18 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Card, Grid } from "@material-ui/core";
-//import tt from '@tomtom-international/web-sdk-maps';
-//import services from '@tomtom-international/web-sdk-services';
-// import "./../../assets/ui-library/index.css";
-// import "../../maps.css";
+import StarsRoundedIcon from "@material-ui/icons/StarsRounded";
+import Button from "@material-ui/core/Button";
+import BikesCarousel from "./BikesCarousel";
 import {GoogleMap, useJsApiLoader, DirectionsService, DirectionsRenderer} from '@react-google-maps/api';
 const directionsUrl='https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=place_id:ChIJc-pZtZwOZ0gREjDIGajHACY&destination=place_id:ChIJ3Y7HLZsOZ0gRZ2FxjA3-ACc&mode=driving&key=AIzaSyB9cg4Hwx8RTcNsjQlrhUGS1KwX8pQfqYw';
 export default function Traffic() {
   console.log(DirectionsService)
-  //const [directions,setNewDirections] = useState();
   const [currentResponse,setCurrentResponse] = useState(null);
-  // useEffect(()=>{
-  //   fetch(directionsUrl).then(res=>res.json()).then((result)=>{
-  //     setNewDirections(result)
-  //     console.log(result);
-  //   },(error)=>{
-  //     console.log(error);
-  //   }
-  //   )
-  // },[])
 useEffect(() => {
   if (currentResponse) {
     console.log("Distance & Duration have updated");
   }
 }, [currentResponse]);
-  const centerMap = {
-    lat: 53.3498,
-    lng: -6.2603
-  };
   
   const containerStyle = {
     width: "100%",
@@ -39,18 +24,6 @@ useEffect(() => {
     googleMapsApiKey: "AIzaSyDRUrETccsBFX4-M-4hhUsja268r6Rz0AM"
   })
 
-  const [map, setMap] = React.useState(null)
-
-  const onLoad = React.useCallback(function callback(map) {
-    const bounds = new window.google.maps.LatLngBounds();
-    map.fitBounds(bounds);
-    setMap(map)
-  }, [])
-
-  const onUnmount = React.useCallback(function callback(map) {
-    setMap(null)
-  }, [])
-
   const updateResponse = result=>{
     setCurrentResponse(result)
   }
@@ -60,7 +33,7 @@ useEffect(() => {
   };
 
   const gridRight = {
-    height: "95%",
+    height: "98.7%",
   };
 
   const gridLeftTop = {
@@ -70,7 +43,7 @@ useEffect(() => {
 
   const gridLeftBottom = {
     width: "100%",
-    height: "20%",
+    height: "27%",
   };
 
   const cardLeft = {
@@ -92,27 +65,12 @@ useEffect(() => {
     margin: "10px",
   };
 
-  const cardAccordion = {
-    width: "90%",
-    height: "100%",
-    padding: "10px",
-    margin: "10px",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
+  const buttonStyle = {
+    flex: "1 0 40%",
+    margin: 10,
+    height: 50,
+    fontSize: "1.1rem",
   };
-  
-  const map_style={
-    width: "97%",
-    height: "95%",
-    padding: "10px",
-    margin: "10px",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-end",
-    alignItems: "flex-start",
-    color: "white",
-  }
 
   return isLoaded ? (
     <>
@@ -158,12 +116,89 @@ useEffect(() => {
       </Card>
           </Grid>
           <Grid item style={gridLeftBottom} xs={12}>
-            <Card style={cardLeft} raised></Card>
+            <Card style={cardLeft} raised>
+              <BikesCarousel />
+            </Card>
           </Grid>
         </Grid>
         <Grid item container xs={4} height={1}>
           <Grid item style={gridRight} xs={12}>
-            <Card style={card} raised></Card>
+            <Card style={card} raised>
+              <div style={{ height: "50%" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <StarsRoundedIcon fontSize="large" />
+                  <span style={{ fontSize: "1.8em", fontWeight: 700 }}>
+                    Popular Routes
+                  </span>
+                </div>
+                <hr
+                  style={{
+                    color: "#000000",
+                    backgroundColor: "#000000",
+                    height: 0.5,
+                    borderColor: "#000000",
+                  }}
+                />
+                <div
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    height: "90%",
+                    alignItems: "center",
+                  }}
+                >
+                  <Button
+                    style={buttonStyle}
+                    variant="contained"
+                    color="primary"
+                  >
+                    Route One
+                  </Button>
+                  <Button
+                    style={buttonStyle}
+                    variant="contained"
+                    color="primary"
+                  >
+                    Route One
+                  </Button>
+                  <Button
+                    style={buttonStyle}
+                    variant="contained"
+                    color="primary"
+                  >
+                    Route One
+                  </Button>
+                  <Button
+                    style={buttonStyle}
+                    variant="contained"
+                    color="primary"
+                  >
+                    Route One
+                  </Button>
+                  <Button
+                    style={buttonStyle}
+                    variant="contained"
+                    color="primary"
+                  >
+                    Route One
+                  </Button>
+                  <Button
+                    style={buttonStyle}
+                    variant="contained"
+                    color="primary"
+                  >
+                    Route One
+                  </Button>
+                </div>
+              </div>
+              <div></div>
+            </Card>
           </Grid>
         </Grid>
       </Grid>
