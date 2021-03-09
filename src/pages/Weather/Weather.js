@@ -5,8 +5,8 @@ import { Line } from "react-chartjs-2";
 import WeatherAccordion from "./WeatherAccordion";
 
 export default function Weather() {
-  // const [details, setDetails] = useState(null);
   const [temperature, setTemperature] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [icon, setIcon] = useState(null);
   const [feelsLike, setFeelsLike] = useState(null);
   const [main, setMain] = useState(null);
@@ -14,26 +14,44 @@ export default function Weather() {
   const [windHoursX, setWindHoursX] = useState([]);
   const [humiHoursX, setHumiHoursX] = useState([]);
 
+  //Current Weather Data
   useEffect(() => {
-    fetch("https://citymanagement.herokuapp.com/weatherdata")
-      .then((res) => res.json())
-      .then((res) => {
-        // setDetails(res.data);
-        //console.log(res);
-        setTemperature(res.main.temp);
-        setIcon("w" + res.weather[0].icon);
-        setFeelsLike(res.main.feels_like - 273);
-        setMain(res.weather[0].main);
-      });
+    const fetchWeather = async () => {
+      const weatherData = await fetch(
+        "https://citymanagement.herokuapp.com/weatherdata"
+      )
+        .then((res) => {
+          if (!res.ok) {
+            throw Error(res.statusText);
+          }
+          return res.json();
+        })
+        .catch((error) => console.log(error));
+
+      setTemperature(weatherData.main.temp - 273);
+      setIcon("w" + weatherData.weather[0].icon);
+      setFeelsLike(weatherData.main.feels_like - 273);
+      setMain(weatherData.weather[0].main);
+      setLoading(false);
+    };
+    fetchWeather();
   }, []);
 
+  //Hourly Prediction Data
   useEffect(() => {
     async function fetchpreDataJSON() {
       const response = await fetch(
         "https://citymanagement.herokuapp.com/predictdata"
-      );
-      const preData = await response.json();
-      return preData;
+      )
+        .then((res) => {
+          if (!res.ok) {
+            throw Error(res.statusText);
+          }
+          return res.json();
+        })
+        .catch((error) => console.log(error));
+      // const preData = await response.json();
+      return response;
     }
 
     fetchpreDataJSON().then((preData) => {
@@ -54,11 +72,24 @@ export default function Weather() {
     });
   }, []);
 
-  const hours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-  //console.log(new Date().getHours());
+  //Function to calculate next 12 hours
+  const hours = () => {
+    const twelveHours = [];
+    const d = new Date();
+    let currentHour = d.getHours();
+    for (let i = 0; i < 12; i++) {
+      twelveHours.push(currentHour + ":00");
+      currentHour++;
+      if (currentHour === 24) {
+        currentHour = 0;
+      }
+    }
+    return twelveHours;
+  };
 
+  //Chart Data
   const data = {
-    labels: hours,
+    labels: hours(), //hours
     datasets: [
       {
         label: "Hourly temperature prediction",
@@ -86,13 +117,16 @@ export default function Weather() {
     ],
   };
 
+  const min = Math.min(...tempHoursX) - 2;
+  const max = Math.max(...tempHoursX) + 2;
+
   const options = {
     scales: {
       yAxes: [
         {
           ticks: {
-            // suggestedMin: 0,
-            // suggestedMax: 100,
+            suggestedMin: min,
+            suggestedMax: max,
           },
         },
       ],
@@ -100,95 +134,44 @@ export default function Weather() {
     maintainAspectRatio: false,
   };
 
-  //   useEffect(() => {
-  //     fetch("http://18.234.214.108:8001/weatherdata", {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Accept: "application/json",
-  //         "Access-Control-Allow-Origin": "*",
-  //       },
-  //     })
-  //       .then((response) => response.json())
-  //       .then((response) => setTemperature(Math.floor(response.main.temp - 273)))
-  //       .catch((err) => console.log(err));
-  //   });
-
-  const style = {
-    height: "95vh",
-    margin: "20px",
-  };
-
-  const grid1 = {
-    height: "30%",
-  };
-
-  const grid2 = {
-    height: "60%",
-  };
-
-  const gridLeft = {
-    width: "100%",
-  };
-
-  const cardLeft = {
-    width: "90%",
-    height: "95%",
-    padding: "10px",
-    margin: "10px",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-end",
-    alignItems: "flex-start",
-    background: "linear-gradient(to top, #3551b5ee 0%, #f44336ee 100%)",
-    color: "white",
-  };
-
-  const card = {
-    width: "90%",
-    height: "100%",
-    padding: "10px",
-    margin: "10px",
-  };
-
-  const cardAccordion = {
-    width: "90%",
-    height: "100%",
-    padding: "10px",
-    margin: "10px",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-  };
-
   return (
     <>
-      <Grid container style={style}>
-        <Grid item container xs={3} height={1}>
-          <Grid item style={gridLeft} xs={12}>
-            <Card style={cardLeft} raised>
-              <h1>{Math.floor(temperature - 273)}°</h1>
-              <h3>Feels like {Math.floor(feelsLike)}°</h3>
-              <div className="weather-desc">
-                <h5>{main}</h5>
-                <div className={icon}></div>
-              </div>
-            </Card>
+      {loading ? (
+        <div className="loading-div">
+          <h2 className="loading-h2">Loading...</h2>
+        </div>
+      ) : (
+        <Grid container className="style">
+          <Grid item container xs={3} height={1}>
+            <Grid item className="grid-left" xs={12}>
+              <Card className="card-left" style={{ color: "white" }} raised>
+                {}
+                <h1 data-testid="currentTemp">{Math.floor(temperature)}°</h1>
+                <h3 data-testid="currentFeelsLike">
+                  Feels like {Math.floor(feelsLike)}°
+                </h3>
+                <div className="weather-desc">
+                  <h5 data-testid="currentDesc">{main}</h5>
+                  <div className={icon}></div>
+                </div>
+              </Card>
+            </Grid>
+          </Grid>
+          <Grid item container xs={9} height={1}>
+            <Grid item className="grid1" xs={12}>
+              <Card className="card" raised>
+                <Line data={data} options={options}></Line>
+              </Card>
+            </Grid>
+            <Grid item className="grid2" xs={12}>
+              <Card className="card-accordion" raised>
+                <h2>Prediction for the next 5 days</h2>
+                <WeatherAccordion />
+              </Card>
+            </Grid>
           </Grid>
         </Grid>
-        <Grid item container xs={9} height={1}>
-          <Grid item style={grid1} xs={12}>
-            <Card style={card} raised>
-              <Line data={data} options={options}></Line>
-            </Card>
-          </Grid>
-          <Grid item style={grid2} xs={12}>
-            <Card style={cardAccordion} raised>
-              <h2>Prediction for the next 5 days</h2>
-              <WeatherAccordion />
-            </Card>
-          </Grid>
-        </Grid>
-      </Grid>
+      )}
     </>
   );
 }
