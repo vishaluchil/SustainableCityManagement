@@ -48,8 +48,7 @@ export default function Event() {
 
       <Grid item container xs={3}>
         <Card style={cardLeft} raised>
-          SANDOWLADLSANdsldnawl
-          </Card>
+        </Card>
       </Grid>
 
       <Grid item container xs={9} height={1}>
