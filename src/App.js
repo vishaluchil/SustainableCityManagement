@@ -13,7 +13,7 @@ function App() {
         {/* {<Header />}
         {<Widgets />} */}
         {/* Will contain all the widgets for the dasboard (Weather, traffic ,etc) <Weather /> */}
-        {/*<Event />*/}
+        {<Event />}
         {/* <Traffic /> */}
         <Weather />
         {/* <Header /> App Header/Toolbar */
