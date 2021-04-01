@@ -25,6 +25,64 @@ p {
   padding-top: 0.5em;
 }
 
+.loading-div {
+  height: 100vh;
+  width: 90vw;
+}
+
+.loading-h2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.style {
+  height: 95vh;
+  margin: 20px;
+}
+
+.grid1 {
+  height: 30%;
+}
+
+.grid2 {
+  height: 60%;
+}
+
+.grid-left {
+  width: 100%;
+}
+
+.card-left {
+  width: 90%;
+  height: 95%;
+  padding: 10px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  background: linear-gradient(to top, #3551b5ee 0%, #f44336ee 100%);
+}
+
+.card {
+  width: 90%;
+  height: 100%;
+  padding: 10px;
+  margin: 10px;
+}
+
+.card-accordion {
+  width: 90%;
+  height: 100%;
+  padding: 10px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .weather-desc {
   display: flex;
 }

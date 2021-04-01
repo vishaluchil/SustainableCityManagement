@@ -5,6 +5,7 @@ import Widgets from "./components/Widgets";
 import Weather from "./pages/Weather/Weather";
 import Event from "./pages/Event/Event";
 import Traffic from "./pages/Traffic/Traffic";
+import AirQuality from "./pages/AirQuality/AirQuality";
 
 function App() {
   return (
@@ -13,11 +14,12 @@ function App() {
         {/* {<Header />}
         {<Widgets />} */}
         {/* Will contain all the widgets for the dasboard (Weather, traffic ,etc) <Weather /> */}
-        {/* <Event /> */}
-        <Traffic />
-        {/* <Weather /> */}
-        {/* <Header /> App Header/Toolbar
-        <Widgets /> */}
+        {/*<Event />*/}
+        <AirQuality />
+        {/* <Traffic /> */}
+        <Weather />
+        {/* <Header /> App Header/Toolbar */
+        /*<Widgets />*/ }
         {/* Will contain all the widgets for the dasboard (Weather, traffic ,etc) */}
       </Container>
     </div>
