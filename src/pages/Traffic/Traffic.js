@@ -4,29 +4,44 @@ import StarsRoundedIcon from "@material-ui/icons/StarsRounded";
 import Button from "@material-ui/core/Button";
 import BikesCarousel from "./BikesCarousel";
 import {GoogleMap, useJsApiLoader, DirectionsService, DirectionsRenderer} from '@react-google-maps/api';
+//import routes from "./output.json";
+import RouteCleaner from './RouteCleaner.js';
 const directionsUrl='https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=place_id:ChIJc-pZtZwOZ0gREjDIGajHACY&destination=place_id:ChIJ3Y7HLZsOZ0gRZ2FxjA3-ACc&mode=driving&key=AIzaSyB9cg4Hwx8RTcNsjQlrhUGS1KwX8pQfqYw';
 export default function Traffic() {
-  console.log(DirectionsService)
+  // console.log(DirectionsService)
   const [currentResponse,setCurrentResponse] = useState(null);
-useEffect(() => {
-  if (currentResponse) {
-    console.log("Distance & Duration have updated");
-  }
-}, [currentResponse]);
-  
-  const containerStyle = {
-    width: "100%",
-    height: "100%"
-  };
+  const [currentBusRoute, setBusRoute]=useState({
+    startpoint:['53.391176495085,-6.26219900048751'],
+    endpoint:['53.3525169031735,-6.26392245064604'],
+    waypoints:{}
+    });
+  const [changed, setChanged] = useState(false)
+  // useEffect(() => {
+  //   if (currentResponse) {
+  //     console.log("Distance & Duration have updated");
+  //   }
+  // }, [currentResponse]);
+  let routeObj = RouteCleaner();
+  console.log(routeObj)
+  useEffect(()=>{
+    if(currentBusRoute){
+      console.log('%clilump',"color:red; font-size:20px",String(currentBusRoute.startpoint)+','+String(currentBusRoute.endpoint));
+      console.log('lilump',currentBusRoute.waypoints[0]);
+    }
+  },[currentBusRoute]);
+    const containerStyle = {
+      width: "100%",
+      height: "100%"
+    };
   
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: "AIzaSyDRUrETccsBFX4-M-4hhUsja268r6Rz0AM"
   })
 
-  const updateResponse = result=>{
-    setCurrentResponse(result)
-  }
+  // const updateResponse = result=>{
+  //   setCurrentResponse(result)
+  // }
   const style = {
     height: "95vh",
     margin: "20px",
@@ -71,7 +86,13 @@ useEffect(() => {
     height: 50,
     fontSize: "1.1rem",
   };
-
+  const handleRoute = (event)=>{
+    event.preventDefault()
+    console.log(event.target.value);
+    //console.log(routes[event.target.value].splice(1));
+    setChanged(true)
+    setBusRoute(routeObj[event.target.value]);
+  }
   return isLoaded ? (
     <>
       <Grid container style={style}>
@@ -90,19 +111,26 @@ useEffect(() => {
       >
         { /* Child components, such as markers, info windows, etc. */ }
       
-      <DirectionsService
+      {changed?(<DirectionsService
                     options={{ 
-                      destination: '53.391176495085,-6.26219900048751',
-                      origin: '53.3525169031735,-6.26392245064604',
-                      travelMode: 'TRANSIT'
+                      origin: currentBusRoute.startpoint.toString(),
+                      destination: currentBusRoute.endpoint.toString(),                      
+                      travelMode: 'TRANSIT',
+                      transitOptions: {
+                        modes: ['BUS'],
+                        routingPreference: 'FEWER_TRANSFERS'
+                      },
                     }}
                     // required
-                    callback= {(result)=>{console.log(currentResponse);
-                    if (currentResponse == null){
-                      setCurrentResponse(result);
+                    callback= {(result)=>{console.log(currentResponse,result);
+                      if(result !==  null){
+                        if (result.status === 'OK' && currentResponse === null) {
+                          setCurrentResponse(result);}
+                        else if (result.status === 'OK' && result.geocoded_waypoints[0].place_id!=currentResponse.geocoded_waypoints[0].place_id) {
+                          setCurrentResponse(result);}
                     }}}
       >
-      </DirectionsService>
+      </DirectionsService>):(null)}
                  
       {currentResponse!=null&&( 
         <DirectionsRenderer
@@ -157,6 +185,7 @@ useEffect(() => {
                     style={buttonStyle}
                     variant="contained"
                     color="primary"
+
                   >
                     Route One
                   </Button>
@@ -197,7 +226,14 @@ useEffect(() => {
                   </Button>
                 </div>
               </div>
-              <div></div>
+              <div>
+              <select name="routes" onChange={handleRoute}>
+                  {Object.keys(routeObj).map((key, i) => {
+                      let e = routeObj[key]
+                      return <option key={key} value={key}>Route Number : {e.routenumber}</option>;
+                  })}
+              </select>
+              </div>
             </Card>
           </Grid>
         </Grid>
