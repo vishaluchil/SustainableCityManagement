@@ -17,9 +17,9 @@ function App() {
         {/*<Event />*/}
         <AirQuality />
         {/* <Traffic /> */}
-        <Weather />
+        {/* <Weather /> */}
         {/* <Header /> App Header/Toolbar */
-        /*<Widgets />*/ }
+        /*<Widgets />*/}
         {/* Will contain all the widgets for the dasboard (Weather, traffic ,etc) */}
       </Container>
     </div>
