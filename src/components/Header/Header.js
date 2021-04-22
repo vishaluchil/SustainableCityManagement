@@ -1,5 +1,6 @@
 import React from "react";
 import { Grid, Button } from "@material-ui/core";
+import "./Header.css"
 
 export default function Header() {
   return (
@@ -7,7 +8,7 @@ export default function Header() {
       <Grid container justify="center">
         <Grid item lg={6} md={6} sm={6}>
           {/* Only used for title text */}
-          <h1>Dashboard</h1>
+          <h1 id="Logo">Dublin Dashboard</h1>
         </Grid>
 
         <Grid /* All Icons/Buttons for navigation */
