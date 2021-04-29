@@ -86,7 +86,7 @@ class ScheduleCalendar extends Component {
           for(var i = 0; i < this.state.eventID.length; i++)
           {
             fetchEvent(this.state.eventID[i]);
-          }
+          } 
       };
 
       fetchEventList();

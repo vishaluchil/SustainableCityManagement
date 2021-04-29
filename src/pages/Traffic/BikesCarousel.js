@@ -8,12 +8,15 @@ export default function BikesCarousel() {
   const [bikesOriginal, setBikesOriginal] = useState(null);
   const [input, setInput] = useState("");
 
-  useEffect(async () => {
-    const bikes = await fetch(
-      "https://cors-anywhere.herokuapp.com/https://api.jcdecaux.com/vls/v1/stations?contract=Dublin&apiKey=4e4430ec0cbff179ef35047b4a05fd178d18b37f"
-    ).then((res) => res.json());
-    setBikesData(() => bikes);
-    setBikesOriginal(() => bikes);
+  useEffect(() => {
+    const fetchBikesData = async () => {
+      const bikes = await fetch(
+        "https://citymanagement.herokuapp.com/bikedata"
+      ).then((res) => res.json());
+      setBikesData(() => bikes);
+      setBikesOriginal(() => bikes);
+    };
+    fetchBikesData();
   }, []);
 
   // console.log(bikesData[0].address);
