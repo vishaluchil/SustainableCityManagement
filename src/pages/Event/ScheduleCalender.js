@@ -3,16 +3,32 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "./Event.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import Button from "@material-ui/core/Button";
+import { rest } from "msw";
 
 
 const localizer = momentLocalizer(moment);
+const buttonStyle = {
+  flex: "1 0 40%",
+  margin: 10,
+  height: 50,
+  fontSize: "1.1rem",
+};
+
 
 class ScheduleCalendar extends Component {
-  state = {
-    events: [
-      {}
-    ]
-  };
+  constructor(props) {
+    super(props);
+    this.handleSelectEvent = this.handleSelectEvent.bind(this);
+ 
+    this.state = {
+      events: [
+        {}
+      ],
+      eventsID: [{}]
+    };
+  }
+
 
   addEvents(eventsList){
     this.setState(state => {
@@ -22,7 +38,11 @@ class ScheduleCalendar extends Component {
       };
     });
   }
-
+  handleSelectEvent(event) {
+    this.props.changeTitle(event.title)
+    this.props.changeSummary(event.description)
+    this.props.changeImage(event.logo)
+  }
   componentDidMount(){
     const fetchEvent = async (eventID) => {
       const eventData = await fetch(
@@ -50,20 +70,31 @@ class ScheduleCalendar extends Component {
         }
         this.addEvents(newEvent);
       }
-      fetchEvent(130904455751);
-      fetchEvent(138432727013);
-      fetchEvent(141037654421);
-      fetchEvent(144071470647);
-      fetchEvent(139973682051);
-      fetchEvent(137435680821);
-      fetchEvent(137435801181);
-      fetchEvent(144686530307);
 
+      const fetchEventList = async () => {
+        const eventList = await fetch(
+          "https://citymanagement.herokuapp.com/eventid"
+        )
+          .then((res) => {
+            if (!res.ok) {
+              throw Error(res.statusText);
+            }
+            return res.json();
+          })
+          .catch((error) => console.log(error));
+          this.setState({eventID: eventList.data});
+          for(var i = 0; i < this.state.eventID.length; i++)
+          {
+            fetchEvent(this.state.eventID[i]);
+          } 
+      };
+
+      fetchEventList();
   }
 
+
   render() {
-    return (
-   
+    return (   
       <div className="ScheduleCalender">
         <Calendar
           localizer={localizer}
@@ -71,7 +102,10 @@ class ScheduleCalendar extends Component {
           defaultView="month"
           events={this.state.events}
           style={{ height: "80vh" }}
+          views={['month']}
+          onSelectEvent={this.handleSelectEvent} 
         />
+
       </div>
     );
   }

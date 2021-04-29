@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Card, Grid } from "@material-ui/core";
 import "./Event.css";
 import ScheduleCalendar from "./ScheduleCalender";
+import CardMedia from '@material-ui/core/CardMedia';
 import { makeStyles } from '@material-ui/core/styles';
 
 
@@ -18,23 +19,17 @@ export default function Event() {
   };
 
 
-  const cardLeft = {
+  const card = {
     width: "100%",
     height: "90%",
     padding: "10px",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "flex-end",
-    alignItems: "flex-start",
-    color: "white",
+
   };
 
-  const card = {
-    width: "90%",
-    height: "80%",
-    padding: "10px",
-    margin: "10px",
-  };
+  //    justifyContent: "flex-end",
+  //alignItems: "flex-start",
 
   const cardAccordion = {
     width: "100%",
@@ -43,11 +38,54 @@ export default function Event() {
     display: "flex",
     flexDirection: "column",
   };
+
+  const [title, setTitle] = useState("Titledadsadsa")
+  const [picture, setPicture] = useState("https://i.imgur.com/DTxieS1.png")
+  const [summary, setSummary] = useState("SOME TEXT AND STUFF")
+
+  function changeTitle(evt) {
+    setTitle(evt)
+  }
+
+  function changeSummary(evt) {
+    setSummary(evt)
+  }
+  function changeImage(evt) {
+    setPicture(evt)
+  }
+
+  function handleSelectEvent(evt,target) {
+    let obj = target.currentTarget
+    obj.getElementsByTagName('strong')[0].click()
+  }
+
+     // <BookTitle onTitleChange={handleTitleChange} title={title} />
+
+
+     const useStyles = makeStyles({
+      root: {
+          width: 250,
+          height: 200,
+          padding: 2
+      },
+      media: {
+          height: 100,
+      },
+  });
+
+  const classes = useStyles();
   return (
     <Grid container spacing={1} style={style}>
 
       <Grid item container xs={3}>
-        <Card style={cardLeft} raised>
+        <Card style={card} raised>
+          {title}
+          <CardMedia
+                    className={classes.media}
+                    image={picture} 
+                    title="TestImage"
+                />
+          {summary}
         </Card>
       </Grid>
 
@@ -55,7 +93,7 @@ export default function Event() {
 
         <Grid item style={grid2} xs={12}>
           <Card style={cardAccordion} raised>
-            <div class="rbc"><ScheduleCalendar /></div>
+            <ScheduleCalendar  changeTitle={changeTitle} changeSummary={changeSummary} changeImage = {changeImage}/>
           </Card>
         </Grid>
 
