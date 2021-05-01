@@ -1,5 +1,30 @@
 h1,
 h3,
+h4,
 h5 {
   margin: 5px 0;
+}
+
+.gauge-card {
+  height: 35vh;
+  margin: 0.5em;
+  text-align: center;
+}
+
+.air-gauge-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.air-gauge {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.air-chart {
+  height: 50vh;
+  margin: 0.5em;
 }
