@@ -8,7 +8,7 @@ export default function RouteCleaner(){
         let index = created_bus_number.indexOf(actual_bus_number)
         let pathNumber = actual_bus_number.split('-')[2]
         pathNumber = pathNumber.match(/[a-zA-Z]+|[0-9]+/g)
-        console.log(pathNumber)
+        
         //route.routenumber !== actual_bus_number.split('-')[2])
         if(index === -1 && pathNumber[0] === 'b'){
             
@@ -18,8 +18,6 @@ export default function RouteCleaner(){
             let routeNumber = actual_bus_number.split('-')[1]
             let routeStart = routes[key][0]
             let routeEnd = routes[key][routesArray.length-1]
-            if (routeNumber === '15'){ 
-            console.log(routeStart[0].toString()===routeEnd[0].toString())}
             if (routeStart[0].toString() !== routeEnd[0].toString()){
             let wayPoints = []
             routesArray.forEach((item,index)=>{
@@ -53,12 +51,12 @@ export default function RouteCleaner(){
 //     console.log('Write complete')
 //   })
 //   .catch(error => console.error(error))
-const fileData = JSON.stringify(routeStartandDestination);
-const blob = new Blob([fileData], {type: "text/plain"});
-const url = URL.createObjectURL(blob);
-const link = document.createElement('a');
-link.download = 'filename.json';
-link.href = url;
-link.click();
+// const fileData = JSON.stringify(routeStartandDestination);
+// const blob = new Blob([fileData], {type: "text/plain"});
+// const url = URL.createObjectURL(blob);
+// const link = document.createElement('a');
+// link.download = 'filename.json';
+// link.href = url;
+// link.click();
 return routeStartandDestination
 }
