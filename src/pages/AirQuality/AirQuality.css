@@ -12,6 +12,7 @@ h5 {
 }
 
 .air-gauge-container {
+  width: auto;
   display: flex;
   justify-content: space-around;
   align-items: center;
