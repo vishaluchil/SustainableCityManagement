@@ -51,11 +51,42 @@ function AirQuality() {
             }
       }
 
+      const getForecast = (forecast) => {
+            const forecastArray = forecast.map(el => {
+                  return el.avg
+            })
+            console.log(forecastArray)
+            return forecastArray
+      }
+
+      const join = (t, a, s) => {
+            const format = (m) => {
+                  let f = new Intl.DateTimeFormat('en', m);
+                  return f.format(t);
+            }
+            return a.map(format).join(s);
+      }
+
+      const getForecastDates = () => {
+            const fiveDays = [];
+            let a = [{ day: 'numeric' }, { month: 'short' }];
+
+            for (let i = 0; i < 5; i++) {
+                  const d = new Date();
+                  d.setDate(d.getDate() + i);
+                  let s = join(d, a, '-');
+                  console.log(s);
+                  fiveDays.push(s)
+            }
+
+            return fiveDays;
+      };
+
       return (
             <>
                   <Card className="gauge-card" raised>
                         {loading ? (
-                              <h3>loading</h3>
+                              <h3>Loading...</h3>
                         ) : (
                               <>
                                     <Carousel pagination={false}>
@@ -65,15 +96,15 @@ function AirQuality() {
                                                             <h3 style={{ fontSize: "1.7em", marginBottom: "1em" }}>Air Quality in {station.cityName} </h3>
                                                             <div className="air-gauge-container">
                                                                   <div className="air-gauge" >
-                                                                        <GaugeChart id={`${i}a`} percent={station.aqi / 100} style={{ width: "100%", fontWeight: 700 }} textColor="#696969" arcWidth={0.3} marginInPercent={0.02} formatTextValue={value => value} />
+                                                                        <GaugeChart id={`${i}a`} percent={station.aqi / 100} style={{ width: "100%", fontWeight: 700 }} textColor="#696969" arcWidth={0.3} marginInPercent={0.02} formatTextValue={value => value} arcsLength={[0.5, 0.25, 0.25]} />
                                                                         <h3>AQI</h3>
                                                                   </div>
                                                                   <div className="air-gauge" style={{ width: "100%" }}>
-                                                                        <GaugeChart id={`${i}b`} percent={station.pm10 / 100} style={{ width: "100%", fontWeight: 700 }} textColor="#696969" arcWidth={0.3} marginInPercent={0.02} formatTextValue={value => value} />
+                                                                        <GaugeChart id={`${i}b`} percent={station.pm10 / 100} style={{ width: "100%", fontWeight: 700 }} textColor="#696969" arcWidth={0.3} marginInPercent={0.02} formatTextValue={value => value} arcsLength={[0.4, 0.4, 0.2]} />
                                                                         <h3>PM 10</h3>
                                                                   </div>
                                                                   <div className="air-gauge" style={{ width: "100%" }}>
-                                                                        <GaugeChart id={`${i}c`} percent={station.pm25 / 100} style={{ width: "100%", fontWeight: 700 }} textColor="#696969" arcWidth={0.3} marginInPercent={0.02} formatTextValue={value => value} />
+                                                                        <GaugeChart id={`${i}c`} percent={station.pm25 / 100} style={{ width: "100%", fontWeight: 700 }} textColor="#696969" arcWidth={0.3} marginInPercent={0.02} formatTextValue={value => value} arcsLength={[0.25, 0.25, 0.5]} />
                                                                         <h3>PM 2.5</h3>
                                                                   </div>
                                                             </div>
@@ -85,7 +116,52 @@ function AirQuality() {
                         )}
                   </Card>
                   <Card className="air-chart" raised>
-                        blah blah
+                        {loading ? (
+                              <h3>Loading...</h3>
+                        ) : (
+                              <div style={{ height: "100%", width: "100%" }}>
+                                    <Carousel pagination={false} style={{ height: "100%", width: "100%" }}>
+                                          {stations.map((station, i) => {
+                                                return (
+                                                      <div key={i} className="air-gauge">
+                                                            <h3>Air Quality forecast for {station.cityName}</h3>
+                                                            <div style={{ height: "330px", width: "100%" }} >
+                                                                  <Line height={"320px"} width={"100%"} data={{
+                                                                        labels: getForecastDates(),
+                                                                        datasets: [
+                                                                              {
+                                                                                    label: "O3",
+                                                                                    data: getForecast(station.forecastO3),
+                                                                                    backgroundColor: "#f44336bb",
+                                                                                    borderColor: "#3551b5bb",
+                                                                                    borderWidth: 5,
+                                                                              },
+                                                                              {
+                                                                                    label: "PM 10",
+                                                                                    data: getForecast(station.forecastPM10),
+                                                                                    backgroundColor: "#29b6f6bb",
+                                                                                    borderColor: "#0288d1bb",
+                                                                                    borderWidth: 5,
+                                                                                    hidden: true,
+                                                                              },
+                                                                              {
+                                                                                    label: "PM 2.5",
+                                                                                    data: getForecast(station.forecastPM25),
+                                                                                    backgroundColor: "#C0C0C0bb",
+                                                                                    borderColor: "#808080bb",
+                                                                                    borderWidth: 5,
+                                                                                    hidden: true,
+                                                                              },
+                                                                        ],
+                                                                  }} options={{ maintainAspectRatio: false }}>
+                                                                  </Line>
+                                                            </div>
+                                                      </div>
+                                                );
+                                          })}
+                                    </Carousel>
+                              </div>
+                        )}
                   </Card>
             </>
       )
