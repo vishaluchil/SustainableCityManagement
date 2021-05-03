@@ -6,7 +6,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import { makeStyles } from '@material-ui/core/styles';
 
 
-
 export default function Event() {
   const style = {
     height: "95vh",
@@ -25,8 +24,39 @@ export default function Event() {
     padding: "10px",
     display: "flex",
     flexDirection: "column",
-
   };
+  const titleCard = {
+    width: "100%",
+    maxHeight: "fit-content",
+    display: "flex",
+    flexDirection: "column",
+  };
+  const dateCard = {
+    width: "100%",
+    height: "7  %",
+    display: "flex",
+    flexDirection: "column",
+    backgroundColor: "beige",
+    paddingBottom: "5"
+  };
+
+  const headline = {
+    textAlign: 'center', // <-- the magic
+    fontWeight: 'bold',
+    fontSize: 30,
+  }
+
+  const text = {
+    textAlign: 'center', // <-- the magic
+    fontWeight: 'normal',
+    fontSize: 18,
+  }
+
+  const dateText = {
+    textAlign: "center",
+    fontWeight: 'normal',
+    fontSize: 16,
+  }
 
   //    justifyContent: "flex-end",
   //alignItems: "flex-start",
@@ -39,12 +69,20 @@ export default function Event() {
     flexDirection: "column",
   };
 
-  const [title, setTitle] = useState("Titledadsadsa")
-  const [picture, setPicture] = useState("https://i.imgur.com/DTxieS1.png")
-  const [summary, setSummary] = useState("SOME TEXT AND STUFF")
+  const [title, setTitle] = useState("Upcoming Events!")
+  const [picture, setPicture] = useState("https://blogmedia.evbstatic.com/wp-content/uploads/wpmulti/sites/19/2016/11/15163142/winter-event-ideas.jpg")
+  const [summary, setSummary] = useState("There's alot of great events coming up! Click on any of them to find out more!")
+  const [startDate, setStartDate] = useState("Events will start soon!")
+  const [endDate, setEndDate] = useState("")
 
   function changeTitle(evt) {
     setTitle(evt)
+  }
+  function changeStartDate(evt) {
+    setStartDate(evt)
+  }
+  function changeEndDate(evt) {
+    setEndDate(evt)
   }
 
   function changeSummary(evt) {
@@ -58,10 +96,6 @@ export default function Event() {
     let obj = target.currentTarget
     obj.getElementsByTagName('strong')[0].click()
   }
-
-     // <BookTitle onTitleChange={handleTitleChange} title={title} />
-
-
      const useStyles = makeStyles({
       root: {
           width: 250,
@@ -79,13 +113,20 @@ export default function Event() {
 
       <Grid item container xs={3}>
         <Card style={card} raised>
-          {title}
+          <Card style={titleCard} raised>
+           <h1 style={headline}>{title}</h1>
+          </Card>
           <CardMedia
                     className={classes.media}
                     image={picture} 
                     title="TestImage"
                 />
-          {summary}
+          <Card style={dateCard} raised>
+            <h2 style={dateText}>{startDate} </h2>
+            <h2 style={dateText}>{endDate} </h2>
+            <h2 style={dateText}></h2> 
+          </Card>
+          <h2 style={text}>{summary}</h2>
         </Card>
       </Grid>
 
@@ -93,7 +134,7 @@ export default function Event() {
 
         <Grid item style={grid2} xs={12}>
           <Card style={cardAccordion} raised>
-            <ScheduleCalendar  changeTitle={changeTitle} changeSummary={changeSummary} changeImage = {changeImage}/>
+            <ScheduleCalendar  changeTitle={changeTitle} changeSummary={changeSummary} changeImage = {changeImage} changeEndDate={changeEndDate} changeStartDate = {changeStartDate}/>
           </Card>
         </Grid>
 

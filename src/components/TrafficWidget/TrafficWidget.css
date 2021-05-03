@@ -1,0 +1,42 @@
+.traffic-card {
+  background-image: url("../../assets/images/bus.png");
+  position: relative;
+  overflow: hidden;
+  width: 50%;
+  height: 60%;
+  background-size: 50%;
+  background-repeat: no-repeat; 
+  background-position: center;
+  margin-top: 10%;
+}
+.bike-card {
+  background-image: url("../../assets/images/bicycle.png");
+  position: relative;
+  overflow: hidden;
+  width: 50%;
+  height: 60%;
+  background-size: 50%;
+  background-position: center;
+  background-repeat: no-repeat; 
+  margin-top: 10%;
+}
+.image-wrapper{
+  width: inherit;
+  height: 60%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.traffic-text{
+  padding-top: 0%;
+  margin: 0%;
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+  font-size: 1.5rem;
+  text-decoration: none;
+  text-align: center;
+  color: black;
+  
+}
+a{
+  text-decoration: none;
+}

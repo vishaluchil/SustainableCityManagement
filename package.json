@@ -12,6 +12,7 @@
     "@tomtom-international/web-sdk-maps": "^6.6.0",
     "@tomtom-international/web-sdk-services": "^6.6.0",
     "chart.js": "^2.9.4",
+    "font-awesome-animation": "^1.1.1",
     "fontsource-roboto": "^4.0.0",
     "fs": "^0.0.1-security",
     "jsonfile": "^6.1.0",
@@ -56,5 +57,16 @@
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.0",
     "msw": "^0.27.0"
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vishaluchil/SustainableCityManagement.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vishaluchil/SustainableCityManagement/issues"
   }
 }

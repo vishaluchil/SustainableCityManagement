@@ -42,7 +42,10 @@ class ScheduleCalendar extends Component {
     this.props.changeTitle(event.title)
     this.props.changeSummary(event.description)
     this.props.changeImage(event.logo)
+    this.props.changeStartDate("Start Time:" + new Date(event.start).toDateString() + " " + new Date(event.start).getUTCHours() +  ":" + new Date(event.start).getUTCMinutes())
+    this.props.changeEndDate("End Time: " + new Date(event.end).toDateString() + " " + new Date(event.end).getUTCHours() +  ":" + new Date(event.end).getUTCMinutes())
   }
+  
   componentDidMount(){
     const fetchEvent = async (eventID) => {
       const eventData = await fetch(

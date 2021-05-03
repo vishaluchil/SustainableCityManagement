@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 import WeatherWidget from "./WeatherWidget/WeatherWidget";
 import EventWidget from "./EventWidget/EventWidget";
 import AirQualityWidget from "./AirQualityWidget/AirQualityWidget";
-
+import TrafficWidget from "./TrafficWidget/TrafficWidget";
+import Recommendations from "./RecommendationPanel/Recommendations"
 
 const Widget = () => {
   return (
@@ -37,8 +38,9 @@ export default function Widgets() {
           <AirQualityWidget />
         </Link>
         <Link to="/traffic">
-          <Widget />
+          <TrafficWidget />
         </Link>
+        <Recommendations />  
       </Grid>
 
     </React.Fragment>
