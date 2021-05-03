@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Card, Grid } from "@material-ui/core";
 import "./AirQuality.css";
+import Carousel from "react-elastic-carousel";
 import GaugeChart from 'react-gauge-chart'
 import { Line } from "react-chartjs-2";
 
@@ -25,6 +26,7 @@ function AirQuality() {
             for (const station of allStations) {
 
                   stationData.push(getCityName(await getAllStations(station[0], station[1])))
+                  console.log(stationData)
             }
             // allStations.forEach(async (station) => {
 
@@ -37,31 +39,43 @@ function AirQuality() {
 
       const getCityName = (sta) => {
             return {
+                  cityName: sta.city.name.substring(0, sta.city.name.indexOf(",")),
                   aqi: sta.aqi,
-                  cityName: sta.city.name
+                  pm10: sta.iaqi.pm10.v,
+                  pm25: sta.iaqi.pm25.v,
+                  forecastO3: sta.forecast.daily.o3,
+                  forecastPM10: sta.forecast.daily.pm10,
+                  forecastPM25: sta.forecast.daily.pm25,
             }
       }
 
       return (
             <>
-                  <Card className="gauge-card" raised>
-                        <h3 style={{ fontSize: "1.7em" }}>Air Quality</h3>
-                        <div className="air-gauge-container">
-                              {stations.map((el) => {
-                                    return (<div key={el.cityName} className="air-gauge" >
-                                          <GaugeChart style={{ width: "90%", fontWeight: 700 }} textColor="#696969" arcWidth={0.3} marginInPercent={0.02} />
-                                          <h3>{el.aqi}</h3>
-                                    </div>)
+                  <Card raised>
+                        <Carousel pagination={false} itemsToShow={1}>
+                              {stations.map((station) => {
+                                    return (
+                                          <div className="gauge-card" style={{ width: "100%" }}>
+                                                <h3 style={{ fontSize: "1.7em", marginBottom: "1em" }}>Air Quality in {station.cityName}</h3>
+
+                                                <div className="air-gauge-container">
+                                                      <div className="air-gauge" >
+                                                            <GaugeChart percent={station.aqi / 100} style={{ width: "90%", fontWeight: 700 }} textColor="#696969" arcWidth={0.3} marginInPercent={0.02} formatTextValue={value => value} />
+                                                            <h3>AQI</h3>
+                                                      </div>
+                                                      <div className="air-gauge" style={{ width: "100%" }}>
+                                                            <GaugeChart percent={station.pm10 / 100} style={{ width: "90%", fontWeight: 700 }} textColor="#696969" arcWidth={0.3} marginInPercent={0.02} formatTextValue={value => value} />
+                                                            <h3>PM 10</h3>
+                                                      </div>
+                                                      <div className="air-gauge" style={{ width: "100%" }}>
+                                                            <GaugeChart percent={station.pm25 / 100} style={{ width: "90%", fontWeight: 700 }} textColor="#696969" arcWidth={0.3} marginInPercent={0.02} formatTextValue={value => value} />
+                                                            <h3>PM 2.5</h3>
+                                                      </div>
+                                                </div>
+                                          </div>
+                                    );
                               })}
-                              {/* <div className="air-gauge" style={{ width: "100%" }}>
-                                    <GaugeChart style={{ width: "90%", fontWeight: 700 }} textColor="#696969" arcWidth={0.3} marginInPercent={0.02} />
-                                    <h3>CO2</h3>
-                              </div>
-                              <div className="air-gauge" style={{ width: "100%" }}>
-                                    <GaugeChart style={{ width: "90%", fontWeight: 700 }} textColor="#696969" arcWidth={0.3} marginInPercent={0.02} />
-                                    <h3>CO2</h3>
-                              </div> */}
-                        </div>
+                        </Carousel>
                   </Card>
                   <Card className="air-chart" raised>
                         blah blah
