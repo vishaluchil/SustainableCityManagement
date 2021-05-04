@@ -63,11 +63,11 @@ export default function BikesCarousel() {
           {bikesData.map((obj) => {
             return (
               <div style={{ width: "100%", display: "inline-block" }}>
-                <div className="bikeAddress">{obj.address}</div>
+                <div data-testid="address" className="bikeAddress">{obj.address}</div>
                 <div className="bikeContainer">
-                  <div>Available Bikes: {obj.available_bikes}</div>
+                  <div data-testid="availableBikes">Available Bikes: {obj.available_bikes}</div>
                   <div className="line"></div>
-                  <div>Available Stands: {obj.available_bike_stands}</div>
+                  <div data-testid="availableStands">Available Stands: {obj.available_bike_stands}</div>
                 </div>
               </div>
             );
