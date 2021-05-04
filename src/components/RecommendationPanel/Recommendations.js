@@ -91,8 +91,8 @@ export default function Recommendations() {
               {/* For Weather */}
               <div key={"weather"} className="alert-severe" style={{ padding: "2%" }}>
                 <span className="closebtn" onClick={(e) => { handleClick(e) }} >&times;</span>
-                <i className="fa fa-exclamation-triangle faa-flash animated fa-blink"></i>  
-                <span> High Chance of Percipation Today</span>
+                <i className="fa fa-exclamation-triangle faa-flash animated fa-blink"></i>
+                <span> High Chance of Precipitation Today</span>
               </div>
 
               {/* For Traffic */}
