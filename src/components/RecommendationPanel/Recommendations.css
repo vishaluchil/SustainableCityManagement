@@ -42,4 +42,14 @@ a {
   display: block;
   font-size: 1.2em;
   font-weight: 700;
+  overflow-y: scroll;
+}
+.alert-severe{
+  margin: 3px;
+  padding: 3%;
+  background-color: red;
+  color: white;
+  width: 92%;
+  display: inline-block;
+  border-radius: 5px;
 }

@@ -144,7 +144,7 @@ export default function Weather() {
           <h2 className="loading-h2">Loading...</h2>
         </div>
       ) : (
-        <Grid container className="style">
+        <Grid container className="style-weather">
           <Grid item container xs={3} height={1}>
             <Grid item className="grid-left" xs={12}>
               <Card className="card-left" style={{ color: "white" }} raised>

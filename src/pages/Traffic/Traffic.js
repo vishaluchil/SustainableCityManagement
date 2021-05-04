@@ -234,7 +234,7 @@ export default function Traffic() {
                 />
 
 
-                <div className='notifications-wrapper' style={{
+                <div className='notifications-wrapper-traffic' style={{
                   height: "40vh",
                   display: "block"
                 }}>
@@ -246,7 +246,7 @@ export default function Traffic() {
                         console.log(trafficAlerts)
                         if (trafficAlerts[i] === true) {
                           return (
-                            <div key={key} className="alert-severe">
+                            <div key={key} className="alert-severe-traffic">
                               <span className="closebtn" onClick={(e) => { handleClick(e) }} >&times;</span>
                               <i className="start-icon fa fa-exclamation-triangle faa-flash animated"></i> Potential Traffic Jam at route {new_key}
                             </div>
