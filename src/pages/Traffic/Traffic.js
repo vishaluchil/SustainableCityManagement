@@ -160,14 +160,14 @@ export default function Traffic() {
             </Card>
           </Grid>
           <Grid item className="gridLeftBottom" xs={12} style={{ marginTop: "1%" }}>
-            <Card className="cardLeft" raised>
+            <Card className="cardLeft-traffic" raised>
               <BikesCarousel />
             </Card>
           </Grid>
         </Grid>
         <Grid item container xs={4} height={0.3}>
-          <Grid item className="gridRight" xs={12}>
-            <Card className="card" raised>
+          <Grid item className="gridRight-traffic" xs={12}>
+            <Card className="card-traffic" raised>
               <div >
                 <div
                   style={{
