@@ -149,9 +149,9 @@ export default function Weather() {
             <Grid item className="grid-left" xs={12}>
               <Card className="card-left" style={{ color: "white" }} raised>
                 { }
-                <h1 data-testid="currentTemp">{Math.floor(temperature)}°</h1>
+                <h1 data-testid="currentTemp">{Math.round(temperature)}°</h1>
                 <h3 data-testid="currentFeelsLike">
-                  Feels like {Math.floor(feelsLike)}°
+                  Feels like {Math.round(feelsLike)}°
                 </h3>
                 <div className="weather-desc">
                   <h5 data-testid="currentDesc">{main}</h5>
