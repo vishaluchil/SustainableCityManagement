@@ -50,7 +50,6 @@ export default function Weather() {
           return res.json();
         })
         .catch((error) => console.log(error));
-      // const preData = await response.json();
       setLoading(false);
       return response;
     }
@@ -92,7 +91,7 @@ export default function Weather() {
 
   //Chart Data
   const data = {
-    labels: hours(), //hours
+    labels: hours(),
     datasets: [
       {
         label: "Hourly temperature prediction",

@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Card, Grid } from "@material-ui/core";
-import "./Event.css";
 import ScheduleCalendar from "./ScheduleCalender";
 import CardMedia from '@material-ui/core/CardMedia';
 import { makeStyles } from '@material-ui/core/styles';
@@ -12,11 +11,9 @@ export default function Event() {
     margin: "20px",
   };
 
-
   const grid2 = {
     height: "100%",
   };
-
 
   const card = {
     width: "100%",
@@ -25,12 +22,14 @@ export default function Event() {
     display: "flex",
     flexDirection: "column",
   };
+
   const titleCard = {
     width: "100%",
     maxHeight: "fit-content",
     display: "flex",
     flexDirection: "column",
   };
+
   const dateCard = {
     width: "100%",
     height: "7  %",
@@ -41,13 +40,13 @@ export default function Event() {
   };
 
   const headline = {
-    textAlign: 'center', // <-- the magic
+    textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 30,
   }
 
   const text = {
-    textAlign: 'center', // <-- the magic
+    textAlign: 'center',
     fontWeight: 'normal',
     fontSize: 18,
   }
@@ -57,9 +56,6 @@ export default function Event() {
     fontWeight: 'normal',
     fontSize: 16,
   }
-
-  //    justifyContent: "flex-end",
-  //alignItems: "flex-start",
 
   const cardAccordion = {
     width: "100%",
@@ -71,8 +67,8 @@ export default function Event() {
 
   const [title, setTitle] = useState("Upcoming Events!")
   const [picture, setPicture] = useState("https://blogmedia.evbstatic.com/wp-content/uploads/wpmulti/sites/19/2016/11/15163142/winter-event-ideas.jpg")
-  const [summary, setSummary] = useState("There's alot of great events coming up! Click on any of them to find out more!")
-  const [startDate, setStartDate] = useState("Events will start soon!")
+  const [summary, setSummary] = useState("There's a lot of great events coming up! Click on any of them to find out more!")
+  const [startDate, setStartDate] = useState("Click on an event to see details")
   const [endDate, setEndDate] = useState("")
 
   function changeTitle(evt) {
@@ -92,19 +88,15 @@ export default function Event() {
     setPicture(evt)
   }
 
-  function handleSelectEvent(evt,target) {
-    let obj = target.currentTarget
-    obj.getElementsByTagName('strong')[0].click()
-  }
-     const useStyles = makeStyles({
-      root: {
-          width: 250,
-          height: 200,
-          padding: 2
-      },
-      media: {
-          height: 100,
-      },
+  const useStyles = makeStyles({
+    root: {
+      width: 250,
+      height: 200,
+      padding: 2
+    },
+    media: {
+      height: 100,
+    },
   });
 
   const classes = useStyles();
@@ -114,17 +106,17 @@ export default function Event() {
       <Grid item container xs={3}>
         <Card style={card} raised>
           <Card style={titleCard} raised>
-           <h1 style={headline}>{title}</h1>
+            <h1 style={headline}>{title}</h1>
           </Card>
           <CardMedia
-                    className={classes.media}
-                    image={picture} 
-                    title="TestImage"
-                />
+            className={classes.media}
+            image={picture}
+            title="TestImage"
+          />
           <Card style={dateCard} raised>
             <h2 style={dateText}>{startDate} </h2>
             <h2 style={dateText}>{endDate} </h2>
-            <h2 style={dateText}></h2> 
+            <h2 style={dateText}></h2>
           </Card>
           <h2 style={text}>{summary}</h2>
         </Card>
@@ -134,7 +126,7 @@ export default function Event() {
 
         <Grid item style={grid2} xs={12}>
           <Card style={cardAccordion} raised>
-            <ScheduleCalendar  changeTitle={changeTitle} changeSummary={changeSummary} changeImage = {changeImage} changeEndDate={changeEndDate} changeStartDate = {changeStartDate}/>
+            <ScheduleCalendar changeTitle={changeTitle} changeSummary={changeSummary} changeImage={changeImage} changeEndDate={changeEndDate} changeStartDate={changeStartDate} />
           </Card>
         </Grid>
 

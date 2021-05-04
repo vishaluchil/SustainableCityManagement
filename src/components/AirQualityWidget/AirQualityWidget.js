@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Card, Grid } from "@material-ui/core";
+import { Card } from "@material-ui/core";
 import "./AirQualityWidget.css";
 
 export default function AirQualityWidget() {
 
   const [items, setItems] = useState([])
 
-  useEffect(async() => {
+  useEffect(async () => {
     const apiUrl = "http://api.openweathermap.org/data/2.5/air_pollution?lat=53.3498&lon=-6.2603&appid=8a0cb8ba5d6bf102e8dd29295bdf968e";
     await fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => setItems(data.list[0].components))
       .catch(console.log);
-  },[]);
-
+  }, []);
 
   return (
     <>
@@ -39,8 +38,5 @@ export default function AirQualityWidget() {
         </div>
       </Card>
     </>
-
-
   );
-
 }

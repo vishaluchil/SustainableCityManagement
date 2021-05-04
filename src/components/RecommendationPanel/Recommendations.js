@@ -1,23 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Card, Grid } from "@material-ui/core";
 import "./Recommendations.css";
-
 import StarsRoundedIcon from "@material-ui/icons/StarsRounded";
 
 export default function Recommendations() {
 
   const [urgentTraffic, setTrafficUpdate] = useState(null)
-
   const [extraBikes, setExtraBikes] = useState(null);
-
   const [needBikes, setNeedBikes] = useState(null);
-
   const [trafficAlerts, setTrafficAlerts] = useState(null);
 
-
-
   // Check traffic alerts
-
   useEffect(() => {
     const traffic_response = async () => {
       const traffic_data = await fetch("https://citymanagement.herokuapp.com/trafficdata").then((res) => {
@@ -27,13 +20,9 @@ export default function Recommendations() {
       });
 
       if (traffic_data != null) {
-
         setTrafficAlerts(Array(Object.keys(traffic_data).length).fill(true));
       }
       setTrafficUpdate(traffic_data);
-      console.log(Array(Object.keys(traffic_data).length).fill(true));
-
-
     }
 
     const checkBikes = async () => {
@@ -52,7 +41,6 @@ export default function Recommendations() {
           final_data_mediocre.push(bike);
         }
       }
-      console.log(final_data_mediocre, final_data_urgent);
       setExtraBikes(final_data_mediocre);
       setNeedBikes(final_data_urgent);
     }
@@ -60,12 +48,10 @@ export default function Recommendations() {
     traffic_response();
   }, [])
 
-
-
   const handleClick = (e) => {
     e.target.parentNode.style.display = 'none';
-
   }
+
   return (
     <>
       <Grid item container xs={11}>
@@ -75,7 +61,7 @@ export default function Recommendations() {
               <StarsRoundedIcon fontSize="large" />
               <span style={{ fontSize: "1.5em", fontWeight: 700 }}>
                 Alerts and Suggestions
-                            </span>
+              </span>
             </div>
             <hr
               style={{
@@ -85,7 +71,6 @@ export default function Recommendations() {
                 borderColor: "#000000",
               }}
             />
-
 
             <div className='notifications-wrapper'>
               {/* For Weather */}

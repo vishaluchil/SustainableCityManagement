@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Card, Grid } from "@material-ui/core";
 import "./TrafficWidget.css";
 
@@ -8,13 +8,13 @@ export default function TrafficWidget() {
       <Grid item>
         <Card style={{ width: 250, height: 200, margin: 20 }} raised>
           <div className="image-wrapper">
-          <div className="traffic-card">
-          </div>
-          <div className="bike-card">
-          </div>
+            <div className="traffic-card">
+            </div>
+            <div className="bike-card">
+            </div>
           </div>
           <p className="traffic-text">Traffic Updates</p>
-          </Card>
+        </Card>
       </Grid>
     </>
   );

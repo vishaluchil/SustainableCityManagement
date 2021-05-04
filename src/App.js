@@ -13,13 +13,6 @@ function App() {
     <Router>
       <div className="App">
         <Container maxWidth="lg">
-          {/* {<Header />}
-        {<Widgets />} */}
-          {/* Will contain all the widgets for the dasboard (Weather, traffic ,etc) <Weather /> */}
-          {/*<Event />*/}
-          {/* <AirQuality /> */}
-          {/* <Traffic /> */}
-          {/* <Weather /> */}
           <Header />
           <Switch>
             <Route path="/" exact component={Widgets} />
@@ -28,8 +21,6 @@ function App() {
             <Route path="/event" component={Event} />
             <Route path="/air" component={AirQuality} />
           </Switch>
-          {/* <Widgets /> */}
-          {/* Will contain all the widgets for the dasboard (Weather, traffic ,etc) */}
         </Container>
       </div>
     </Router>

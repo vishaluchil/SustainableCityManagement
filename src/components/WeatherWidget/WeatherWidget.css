@@ -1,12 +1,8 @@
 .weather-card {
-  /* margin: 20px 5px; */
-  /* border-radius: 20px; */
   position: relative;
   overflow: hidden;
   width: inherit;
   height: inherit;
-  /* background: white; */
-  /* box-shadow: 0px 0px 25px 1px rgba(50, 50, 50, 0.1); */
   animation: appear 500ms ease-out forwards;
 }
 .weather-card h1 {
@@ -16,7 +12,6 @@
   font-size: 4em;
   color: #b8b8b8;
   left: 30px;
-  /* opacity: 0; */
   transition: translatex(150px);
   animation: title-appear 500ms ease-out 500ms forwards;
   margin-top: 24px;

@@ -19,20 +19,17 @@ export default function BikesCarousel() {
     fetchBikesData();
   }, []);
 
-  // console.log(bikesData[0].address);
-
   const handleSearchChange = (e) => {
     e.preventDefault();
-    console.log(e.target.value);
 
     if (e.target.value.length > 0) {
+
       let bikesFiltered = bikesOriginal.filter((station) =>
         station.address.toLowerCase().match(e.target.value.toLowerCase())
           ? station
           : null
       );
-      console.log(bikesFiltered);
-      console.log(bikesOriginal);
+
       if (bikesFiltered.length < 1) {
         setBikesData(() => [...bikesOriginal]);
       } else {
@@ -51,13 +48,6 @@ export default function BikesCarousel() {
         onChange={handleSearchChange}
         value={input}
       />
-      {/* <input
-        className="searchBox"
-        type="text"
-        placeholder="Search Station Name"
-        onChange={handleSearchChange}
-        value={input}
-      /> */}
       {bikesData ? (
         <Carousel pagination={false}>
           {bikesData.map((obj) => {

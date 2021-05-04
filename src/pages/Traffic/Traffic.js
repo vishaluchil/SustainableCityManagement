@@ -1,11 +1,9 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Grid } from "@material-ui/core";
 import StarsRoundedIcon from "@material-ui/icons/StarsRounded";
-import Button from "@material-ui/core/Button";
 import BikesCarousel from "./BikesCarousel";
 import { GoogleMap, useJsApiLoader, DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
 import RouteCleaner from './RouteCleaner.js';
-import { EmojiObjects } from "@material-ui/icons";
 import "./Traffic.css"
 export default function Traffic() {
 
@@ -17,13 +15,9 @@ export default function Traffic() {
   });
 
   const [changed, setChanged] = useState(false)
-
   const [urgentTraffic, setTrafficUpdate] = useState(null)
-
   const [extraBikes, setExtraBikes] = useState(null);
-
   const [needBikes, setNeedBikes] = useState(null);
-
   const [trafficAlerts, setTrafficAlerts] = useState(null);
 
 
@@ -53,7 +47,6 @@ export default function Traffic() {
   }
 
   // Check traffic alerts
-
   useEffect(() => {
     const traffic_response = async () => {
       const traffic_data = await fetch("https://citymanagement.herokuapp.com/trafficdata").then((res) => {
@@ -62,16 +55,11 @@ export default function Traffic() {
         }
       });
 
-      // console.log(traffic_response.json())
-
       if (traffic_data != null) {
 
         setTrafficAlerts(Array(Object.keys(traffic_data).length).fill(true));
       }
       setTrafficUpdate(traffic_data);
-      console.log(Array(Object.keys(traffic_data).length).fill(true));
-
-
     }
 
     const checkBikes = async () => {
@@ -90,20 +78,12 @@ export default function Traffic() {
           final_data_mediocre.push(bike);
         }
       }
-      console.log(final_data_mediocre, final_data_urgent);
       setExtraBikes(final_data_mediocre);
       setNeedBikes(final_data_urgent);
     }
     checkBikes();
     traffic_response();
   }, [])
-
-  const handleToggle = (i) => {
-    let curr_array = trafficAlerts;
-    curr_array[i] = false
-    setTrafficAlerts(curr_array);
-    console.log(trafficAlerts);
-  }
 
   const handleClick = (e) => {
     e.target.parentNode.style.display = 'none';
@@ -135,7 +115,6 @@ export default function Traffic() {
                   }}
                   // required
                   callback={(result) => {
-                    console.log(currentResponse, result);
                     if (result !== null) {
                       if (result.status === 'OK' && currentResponse === null) {
                         setCurrentResponse(result);
@@ -243,7 +222,6 @@ export default function Traffic() {
                     (urgentTraffic != null && trafficAlerts != null) ?
                       Object.keys(urgentTraffic).map((key, i) => {
                         let new_key = key.split('-')[1];
-                        console.log(trafficAlerts)
                         if (trafficAlerts[i] === true) {
                           return (
                             <div key={key} className="alert-severe">
@@ -263,7 +241,7 @@ export default function Traffic() {
 
                   {
                     (needBikes != null) ?
-                      needBikes.map((value, index, array) => {
+                      needBikes.map((value) => {
                         return (
                           <div key={value.address} className="alert-mediocre">
                             <span className="closebtn" onClick={(e) => { handleClick(e) }}>&times;</span>

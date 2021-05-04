@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, Grid } from "@material-ui/core";
+import { Card } from "@material-ui/core";
 import "./AirQuality.css";
 import Carousel from "react-elastic-carousel";
 import GaugeChart from 'react-gauge-chart'
@@ -25,18 +25,10 @@ function AirQuality() {
             })
             const stationData = []
             for (const station of allStations) {
-
                   stationData.push(getCityName(await getAllStations(station[0], station[1])))
-                  console.log(stationData)
             }
-            // allStations.forEach(async (station) => {
-
-            // });
             setStations(stationData)
             setLoading(false)
-            // const city = stationData[0].city.name
-            // const onlyCity = city.substr(0, city.indexOf(','))
-            // console.log(onlyCity)
       }, [])
 
       const getCityName = (sta) => {
@@ -55,7 +47,6 @@ function AirQuality() {
             const forecastArray = forecast.map(el => {
                   return el.avg
             })
-            console.log(forecastArray)
             return forecastArray
       }
 
@@ -75,7 +66,6 @@ function AirQuality() {
                   const d = new Date();
                   d.setDate(d.getDate() + i);
                   let s = join(d, a, '-');
-                  console.log(s);
                   fiveDays.push(s)
             }
 

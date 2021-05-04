@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(18),
-    // color: theme.palette.text.secondary,
     flexBasis: "40%",
     textAlign: "end",
   },
@@ -65,7 +64,7 @@ export default function WeatherAccordion() {
       setTempWeeklyX(tempWeekly);
       setRainWeeklyX(rainWeekly);
       setHumiWeeklyX(humiWeekly);
-      setWindWeeklyX(windWeekly); //uncomment
+      setWindWeeklyX(windWeekly);
       setLoading(false);
     }
 

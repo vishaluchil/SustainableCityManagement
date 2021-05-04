@@ -1,26 +1,14 @@
 import React from "react";
-import { Card, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { Link } from 'react-router-dom';
-
 import WeatherWidget from "./WeatherWidget/WeatherWidget";
 import EventWidget from "./EventWidget/EventWidget";
 import AirQualityWidget from "./AirQualityWidget/AirQualityWidget";
 import TrafficWidget from "./TrafficWidget/TrafficWidget";
-import Recommendations from "./RecommendationPanel/Recommendations"
-
-const Widget = () => {
-  return (
-    <React.Fragment>
-      <Grid item>
-        <Card style={{ width: 250, height: 200, margin: 20 }} raised></Card>
-      </Grid>
-    </React.Fragment>
-  );
-};
+import Recommendations from "./RecommendationPanel/Recommendations";
 
 export default function Widgets() {
   return (
-
     <React.Fragment>
       <Grid
         container
@@ -40,10 +28,8 @@ export default function Widgets() {
         <Link to="/traffic">
           <TrafficWidget />
         </Link>
-        <Recommendations />  
+        <Recommendations />
       </Grid>
-
     </React.Fragment>
-
   );
 }
