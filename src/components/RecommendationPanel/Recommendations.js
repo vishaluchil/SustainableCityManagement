@@ -88,6 +88,13 @@ export default function Recommendations() {
 
 
             <div className='notifications-wrapper'>
+              {/* For Weather */}
+              <div key={"weather"} className="alert-severe" style={{ padding: "2%" }}>
+                <span className="closebtn" onClick={(e) => { handleClick(e) }} >&times;</span>
+                <i className="fa fa-exclamation-triangle faa-flash animated fa-blink"></i>  
+                <span> High Chance of Percipation Today</span>
+              </div>
+
               {/* For Traffic */}
               {
                 (urgentTraffic != null && trafficAlerts != null) ?
