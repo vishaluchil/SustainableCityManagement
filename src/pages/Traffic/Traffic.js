@@ -139,14 +139,14 @@ export default function Traffic() {
             </Card>
           </Grid>
           <Grid item className="gridLeftBottom" xs={12} style={{ marginTop: "1%" }}>
-            <Card className="cardLeft" raised>
+            <Card className="cardLeft-traffic" raised>
               <BikesCarousel />
             </Card>
           </Grid>
         </Grid>
         <Grid item container xs={4} height={0.3}>
-          <Grid item className="gridRight" xs={12}>
-            <Card className="card" raised>
+          <Grid item className="gridRight-traffic" xs={12}>
+            <Card className="card-traffic" raised>
               <div >
                 <div
                   style={{
@@ -213,7 +213,7 @@ export default function Traffic() {
                 />
 
 
-                <div className='notifications-wrapper' style={{
+                <div className='notifications-wrapper-traffic' style={{
                   height: "40vh",
                   display: "block"
                 }}>
@@ -224,7 +224,7 @@ export default function Traffic() {
                         let new_key = key.split('-')[1];
                         if (trafficAlerts[i] === true) {
                           return (
-                            <div key={key} className="alert-severe">
+                            <div key={key} className="alert-severe-traffic">
                               <span className="closebtn" onClick={(e) => { handleClick(e) }} >&times;</span>
                               <i className="start-icon fa fa-exclamation-triangle faa-flash animated"></i> Potential Traffic Jam at route {new_key}
                             </div>
