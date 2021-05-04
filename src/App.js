@@ -20,7 +20,7 @@ function App() {
           {/* <AirQuality /> */}
           {/* <Traffic /> */}
           {/* <Weather /> */}
-          <Header /> {/*App Header/Toolbar*/}
+          <Header />
           <Switch>
             <Route path="/" exact component={Widgets} />
             <Route path="/weather" component={Weather} />

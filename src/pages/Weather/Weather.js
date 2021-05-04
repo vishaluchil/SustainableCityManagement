@@ -32,9 +32,9 @@ export default function Weather() {
       setIcon("w" + weatherData.weather[0].icon);
       setFeelsLike(weatherData.main.feels_like - 273);
       setMain(weatherData.weather[0].main);
-      setLoading(false);
+
     };
-    fetchWeather();
+    fetchWeather()
   }, []);
 
   //Hourly Prediction Data
@@ -51,6 +51,7 @@ export default function Weather() {
         })
         .catch((error) => console.log(error));
       // const preData = await response.json();
+      setLoading(false);
       return response;
     }
 
@@ -70,6 +71,7 @@ export default function Weather() {
         ]);
       }
     });
+
   }, []);
 
   //Function to calculate next 12 hours
@@ -84,6 +86,7 @@ export default function Weather() {
         currentHour = 0;
       }
     }
+
     return twelveHours;
   };
 
@@ -145,7 +148,7 @@ export default function Weather() {
           <Grid item container xs={3} height={1}>
             <Grid item className="grid-left" xs={12}>
               <Card className="card-left" style={{ color: "white" }} raised>
-                {}
+                { }
                 <h1 data-testid="currentTemp">{Math.floor(temperature)}°</h1>
                 <h3 data-testid="currentFeelsLike">
                   Feels like {Math.floor(feelsLike)}°

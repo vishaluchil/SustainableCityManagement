@@ -40,7 +40,6 @@ export default function WeatherAccordion() {
 
   const options = {
     weekday: "long",
-    // year: "numeric",
     month: "long",
     day: "numeric",
   };
